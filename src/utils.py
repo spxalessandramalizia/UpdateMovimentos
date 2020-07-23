@@ -43,5 +43,5 @@ def get_cautelas(num_cautelas, conn): pass
 def set_movimentos(codfund, data, mov):
     quoted = urllib.parse.quote_plus('Driver={SQL Server};Server=EQNSQL02\\HOMOLOGASPXBANCO;Database=RIMovimentos;')
     engine = create_engine('mssql+pyodbc:///?odbc_connect={}'.format(quoted))
-    engine.execute('delete temp where CODFUND = {} AND COTIZACAO >= \'{}\''.format(str(codfund), data_to_string(data)))
-    mov.to_sql('temp', schema='db_owner', con=engine, if_exists='append', index=False)
+    engine.execute('delete Movimentacoes where CODFUND = {} AND COTIZACAO >= \'{}\''.format(str(codfund), data_to_string(data)))
+    mov.to_sql('Movimentacoes', schema='dbo', con=engine, if_exists='append', index=False)
