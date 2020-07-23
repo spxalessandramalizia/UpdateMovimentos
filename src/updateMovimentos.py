@@ -20,8 +20,11 @@ def update_movimentos(codfund):
     op.atualiza_resgates_cotas(cota, mov)
     op.atualiza_aplicacoes(cota, mov)
     op.atualiza_resgates_financeiros(cota, mov)
-    op.copia_cotas(data_ref, mov.copy(), mov_saldos)
-    op.atualiza_resgates_totais(cota, mov, mov_saldos, codfund, conn)
+    op.atualiza_resgates_financeiros(cota, mov_saldos.loc[mov_saldos.COTIZACAO>=data_ref])
+    # op.copia_cotas(data_ref, mov.copy(), mov_saldos)
+    op.recalcula_resgates_totais(mov, codfund, data_saldos, conn)
+    op.recalcula_resgates_totais(mov_saldos.loc[mov_saldos.COTIZACAO>=data_ref], codfund, data_saldos, conn)
+    op.atualiza_resgates_totais(cota, mov, mov_saldos)
     # op.atualiza_resgates_totais_por_cautela()
 
     utils.set_movimentos(codfund, data_ref, mov)

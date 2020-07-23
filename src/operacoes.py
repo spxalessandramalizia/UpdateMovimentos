@@ -26,9 +26,15 @@ def copia_cotas(data_ref, mov_origem, mov_destino):
     print(mov_destino)
     return
 
-def atualiza_resgates_totais(cota, mov, mov_saldos, codfund, conn):  
-    resgates_totais = mov[(mov.OPERACAO=='RT') & (mov.CAUTELA==0)].copy()
-    rt.compara_saldos(resgates_totais, codfund, conn)    
+def recalcula_resgates_totais(mov, codfund, data_saldos, conn):
+    resgates_totais = mov[(mov.OPERACAO=='RT') & (mov.COTIZACAO>=data_saldos) & (mov.CAUTELA==0)].copy()
+    rt.compara_saldos(resgates_totais, codfund, conn)
+    resgates_totais.set_index(mov[(mov.OPERACAO=='RT') & (mov.COTIZACAO>=data_saldos) & (mov.CAUTELA==0)].index, inplace=True)
+    mov.loc[((mov.OPERACAO=='RT') & (mov.COTIZACAO>=data_saldos) & (mov.CAUTELA==0)),'COTAS_PREVISTO'] = resgates_totais.COTAS_PREVISTO
+    return
+
+def atualiza_resgates_totais(cota, mov, mov_saldos):
+    resgates_totais = mov[(mov.OPERACAO=='RT') & (mov.CAUTELA==0)].copy()    
     rt.verifica_intervalo(resgates_totais, mov_saldos)
     rt.calcula_financeiro(cota, resgates_totais)
 
