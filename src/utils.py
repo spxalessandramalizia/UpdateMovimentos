@@ -34,7 +34,7 @@ def get_saldos(cotistas, codfund, conn):
 
 def get_data_saldos(conn):
     #retorna primeiro dia que não está sendo considerado na saldos
-    query =  'select max(DTAPROCE) from saldos'
+    query =  'select max(DTAPROCE) from Saldos2'
     data = pd.read_sql_query(query, conn)
     return pd.to_datetime(data.iloc[0])[0]
 
