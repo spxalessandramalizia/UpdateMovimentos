@@ -133,3 +133,4 @@ dmypy.json
 # Excel fils
 **/*.xlsx
 **/*.xls
+**/*.docx
