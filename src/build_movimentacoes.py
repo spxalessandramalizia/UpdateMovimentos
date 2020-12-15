@@ -8,7 +8,7 @@ full_data_path = "O:\CAIXAS\FLUXO\Movimentacoes - Gerencial.csv"
 ri_data_path = "O:\CAIXAS\FLUXO\Movimentações Histórica.xlsm"
 sql_server_string = "Driver={SQL Server};Server=EQNSQL02\\HOMOLOGASPXBANCO;Database=RIMovimentos;Trusted_Connection=yes"
 # mysql_string = "malizia:1234@192.168.1.57/irdb"
-mysql_string = "quant_app:1q2w3e@192.168.1.57/irdb"
+mysql_string = "quant_app:1q2w3e@10.21.2.19/irdb"
 
 ### Controle Data ###
 raw_data = pd.read_csv(full_data_path)[['CODFUND','SOLICITACAO','COTIZACAO','OPERACAO','FINANCEIRO','ALOCADOR']]
